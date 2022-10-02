@@ -10,29 +10,29 @@ import time
 # Create your views here.
 
 def hrms(request):
-    Valid_user = ['et/amd/189@elsner.com']
-    Valid_pass = ['Lucky@123']
-    gettile = ''
+    gettitle = ''
     if request.POST:
-        try:
-            path = "C:/Users/ls217/PycharmProjects/PythonTestFramework/Driver/chromedriver new.exe"
-            chrome_options = Options()
-            chrome_options.add_argument("--headless")
-            driver = webdriver.Chrome(service=Service(executable_path=path), chrome_options=chrome_options)
-            # driver = webdriver.Chrome(path)
-            time.sleep(6)
-            driver.get("https://hrms.orangetechnolab.com/Elsner/Login_Comm1.aspx")
-            driver.maximize_window()
-            driver.find_element(By.XPATH, '//*[@id="txtusename"]').send_keys(Valid_user[0])
-            driver.find_element(By.XPATH, '//*[@id="txtpassword"]').send_keys(Valid_pass[0])
-            driver.find_element(By.XPATH, '//*[@id="btnlogin"]').click()
-            driver.find_element(By.XPATH, '/html/body/div[1]/header/nav/a').click()
-            driver.find_element(By.XPATH, '/html/body/div[1]/aside/div/section/ul/li[1]').click()
-            # driver.find_element(By.XPATH,'/html/body/div[1]/aside/div/section/ul/li[1]').title
-            time.sleep(3)
-            driver.find_element(By.XPATH, '/html/body/div[1]/aside/div/section/ul/li[1]/ul/li[3]').click()
-            gettile = driver.title
-            driver.quit()
-        except:
-            gettile = 'something went wrong'
-    return render(request, 'index.html', {'key': gettile})
+        Valid_user = ['et/amd/189@elsner.com']
+        Valid_pass = ['Lucky@123']
+        # try:
+        chrome_options = Options()
+        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-sh-usage")
+        driver = webdriver.Chrome(service=Service(executable_path=os.environ.get("GOOGLE_CHROME_BIN")), chrome_options=chrome_options)
+        time.sleep(6)
+        driver.get("https://hrms.orangetechnolab.com/Elsner/Login_Comm1.aspx")
+        driver.maximize_window()
+        driver.find_element(By.XPATH, '//*[@id="txtusename"]').send_keys(Valid_user[0])
+        driver.find_element(By.XPATH, '//*[@id="txtpassword"]').send_keys(Valid_pass[0])
+        driver.find_element(By.XPATH, '//*[@id="btnlogin"]').click()
+        driver.find_element(By.XPATH, '/html/body/div[1]/header/nav/a').click()
+        driver.find_element(By.XPATH, '/html/body/div[1]/aside/div/section/ul/li[1]').click()
+        time.sleep(3)
+        driver.find_element(By.XPATH, '/html/body/div[1]/aside/div/section/ul/li[1]/ul/li[3]').click()
+        gettitle = driver.title
+        driver.quit()
+        # except Exception:
+            # gettitle = 'something went wrong'
+    return render(request, 'index.html', {'key': gettitle})
