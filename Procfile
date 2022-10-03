@@ -1,1 +1,1 @@
-web: gunicorn app1/views.wsgi
+web:python app1/views.py
