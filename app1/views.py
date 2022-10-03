@@ -20,7 +20,7 @@ def hrms(request):
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-sh-usage")
-        driver = webdriver.Chrome(service=Service(executable_path=os.environ.get("GOOGLE_CHROME_BIN")), chrome_options=chrome_options)
+        driver = webdriver.Chrome(service=Service(executable_path=os.environ.get("CHROMEDRIVER_PATH")), chrome_options=chrome_options)
         time.sleep(6)
         driver.get("https://hrms.orangetechnolab.com/Elsner/Login_Comm1.aspx")
         driver.maximize_window()
